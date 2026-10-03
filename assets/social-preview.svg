@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="1280" height="640" viewBox="0 0 1280 640">
+  <defs>
+    <radialGradient id="bg" cx="75%" cy="50%" r="80%">
+      <stop offset="0" stop-color="#1f2333"/>
+      <stop offset="1" stop-color="#11131c"/>
+    </radialGradient>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse" x="960" y="320">
+      <path d="M40 0H0V40" fill="none" stroke="#ffffff" stroke-opacity="0.05" stroke-width="1"/>
+    </pattern>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0 0L10 5L0 10z" fill="#8b92a8"/>
+    </marker>
+  </defs>
+
+  <rect width="1280" height="640" fill="url(#bg)"/>
+  <rect width="1280" height="640" fill="url(#grid)"/>
+
+  <!-- Plano complexo -->
+  <g font-family="FiraCode Nerd Font, monospace" fill="#8b92a8">
+    <line x1="720" y1="320" x2="1220" y2="320" stroke="#8b92a8" stroke-width="2" marker-end="url(#arrow)"/>
+    <line x1="960" y1="600" x2="960" y2="40" stroke="#8b92a8" stroke-width="2" marker-end="url(#arrow)"/>
+    <text x="1208" y="350" font-size="20">Re</text>
+    <text x="975" y="52" font-size="20">Im</text>
+    <circle cx="960" cy="320" r="200" fill="none" stroke="#4063D8" stroke-opacity="0.7" stroke-width="2.5" stroke-dasharray="8 7"/>
+    <text x="1150" y="196" font-size="18" fill="#6f86e6">|z| = 1</text>
+
+    <!-- vetores da origem até as raízes -->
+    <g stroke-width="3" stroke-linecap="round">
+      <line x1="960" y1="320" x2="960" y2="166" stroke="#389826"/>
+      <line x1="960" y1="320" x2="826" y2="397" stroke="#CB3C33"/>
+      <line x1="960" y1="320" x2="1094" y2="397" stroke="#9558B2"/>
+    </g>
+    <!-- ângulo de 120° entre as raízes -->
+    <path d="M960 270 A50 50 0 0 1 1003.3 345" fill="none" stroke="#e6e8ef" stroke-opacity="0.6" stroke-width="2"/>
+    <text x="1000" y="282" font-size="17" fill="#c3c7d4">2π/3</text>
+    <circle cx="960" cy="320" r="5" fill="#e6e8ef"/>
+  </g>
+
+  <!-- Os três pontos do Julia como raízes de z³ = −i -->
+  <circle cx="960" cy="120" r="46" fill="#60AD51" stroke="#389826" stroke-width="6"/>
+  <circle cx="786.8" cy="420" r="46" fill="#D5635C" stroke="#CB3C33" stroke-width="6"/>
+  <circle cx="1133.2" cy="420" r="46" fill="#AA79C1" stroke="#9558B2" stroke-width="6"/>
+
+  <g font-family="FiraCode Nerd Font, monospace" font-size="20" fill="#e6e8ef">
+    <text x="1018" y="112">e<tspan font-size="14" dy="-9">iπ/2</tspan></text>
+    <text x="745" y="502">e<tspan font-size="14" dy="-9">i7π/6</tspan></text>
+    <text x="1098" y="502">e<tspan font-size="14" dy="-9">−iπ/6</tspan></text>
+  </g>
+  <text x="1080" y="590" font-family="FiraCode Nerd Font, monospace" font-size="26" font-weight="600" fill="#e6e8ef">z³ = −i</text>
+
+  <!-- Título e texto -->
+  <g font-family="Inter, sans-serif">
+    <text x="72" y="150" font-size="60" font-weight="800" fill="#ffffff">ComplexNumbers<tspan fill="#9558B2">.jl</tspan></text>
+    <text x="74" y="200" font-size="25" font-weight="400" fill="#b8bdcc">Números complexos em Julia: formas polar e</text>
+    <text x="74" y="234" font-size="25" font-weight="400" fill="#b8bdcc">cartesiana, operadores e conjugado.</text>
+  </g>
+
+  <!-- Trecho de código -->
+  <rect x="72" y="282" width="560" height="270" rx="14" fill="#0c0e15" stroke="#2c3142" stroke-width="1.5"/>
+  <circle cx="98" cy="306" r="6" fill="#CB3C33"/>
+  <circle cx="118" cy="306" r="6" fill="#389826"/>
+  <circle cx="138" cy="306" r="6" fill="#9558B2"/>
+  <g font-family="FiraCode Nerd Font, monospace" font-size="20">
+    <text x="96" y="356"><tspan fill="#389826" font-weight="600">julia&gt;</tspan><tspan fill="#e6e8ef"> z = ComplexNumber(3, 4)</tspan></text>
+    <text x="96" y="384" fill="#8b92a8">3 + 4i</text>
+    <text x="96" y="424"><tspan fill="#389826" font-weight="600">julia&gt;</tspan><tspan fill="#e6e8ef"> tostring(z; form=:polar)</tspan></text>
+    <text x="96" y="452" fill="#8b92a8">"5.0∠0.9273 rad"</text>
+    <text x="96" y="492"><tspan fill="#389826" font-weight="600">julia&gt;</tspan><tspan fill="#e6e8ef"> z * z'</tspan></text>
+    <text x="96" y="520" fill="#8b92a8">25 + 0i</text>
+  </g>
+</svg>

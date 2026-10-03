@@ -1,4 +1,6 @@
-# ComplexNumbers.jl
+<div align="center">
+    <img src="assets/social-preview.svg" />
+</div>
 
 Pacote Julia com uma implementação própria de números complexos, `ComplexNumber`, pensada para estudo e uso didático.
 
