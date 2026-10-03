@@ -26,19 +26,19 @@ Clone ou copie o projeto e registre-o no seu ambiente em modo de desenvolvimento
 
 ```julia
 julia> using Pkg
-julia> Pkg.develop(path="/caminho/para/complextools")
+julia> Pkg.develop(path="/caminho/para/complexnumbers")
 ```
 
 Ou, no modo Pkg do REPL (tecle `]`):
 
 ```
-pkg> dev /caminho/para/complextools
+pkg> dev /caminho/para/complexnumbers
 ```
 
 Outra opção é ativar o projeto diretamente na pasta dele:
 
 ```bash
-cd complextools
+cd complexnumbers
 julia --project=.
 ```
 
