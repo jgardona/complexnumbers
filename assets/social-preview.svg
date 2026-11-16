@@ -15,7 +15,7 @@
   <rect width="1280" height="640" fill="url(#bg)"/>
   <rect width="1280" height="640" fill="url(#grid)"/>
 
-  <!-- Plano complexo -->
+  <!-- Complex plane -->
   <g font-family="FiraCode Nerd Font, monospace" fill="#8b92a8">
     <line x1="720" y1="320" x2="1220" y2="320" stroke="#8b92a8" stroke-width="2" marker-end="url(#arrow)"/>
     <line x1="960" y1="600" x2="960" y2="40" stroke="#8b92a8" stroke-width="2" marker-end="url(#arrow)"/>
@@ -24,19 +24,19 @@
     <circle cx="960" cy="320" r="200" fill="none" stroke="#4063D8" stroke-opacity="0.7" stroke-width="2.5" stroke-dasharray="8 7"/>
     <text x="1150" y="196" font-size="18" fill="#6f86e6">|z| = 1</text>
 
-    <!-- vetores da origem até as raízes -->
+    <!-- vectors from the origin to the roots -->
     <g stroke-width="3" stroke-linecap="round">
       <line x1="960" y1="320" x2="960" y2="166" stroke="#389826"/>
       <line x1="960" y1="320" x2="826" y2="397" stroke="#CB3C33"/>
       <line x1="960" y1="320" x2="1094" y2="397" stroke="#9558B2"/>
     </g>
-    <!-- ângulo de 120° entre as raízes -->
+    <!-- 120° angle between the roots -->
     <path d="M960 270 A50 50 0 0 1 1003.3 345" fill="none" stroke="#e6e8ef" stroke-opacity="0.6" stroke-width="2"/>
     <text x="1000" y="282" font-size="17" fill="#c3c7d4">2π/3</text>
     <circle cx="960" cy="320" r="5" fill="#e6e8ef"/>
   </g>
 
-  <!-- Os três pontos do Julia como raízes de z³ = −i -->
+  <!-- The three Julia dots as roots of z³ = −i -->
   <circle cx="960" cy="120" r="46" fill="#60AD51" stroke="#389826" stroke-width="6"/>
   <circle cx="786.8" cy="420" r="46" fill="#D5635C" stroke="#CB3C33" stroke-width="6"/>
   <circle cx="1133.2" cy="420" r="46" fill="#AA79C1" stroke="#9558B2" stroke-width="6"/>
@@ -48,14 +48,14 @@
   </g>
   <text x="1080" y="590" font-family="FiraCode Nerd Font, monospace" font-size="26" font-weight="600" fill="#e6e8ef">z³ = −i</text>
 
-  <!-- Título e texto -->
+  <!-- Title and text -->
   <g font-family="Inter, sans-serif">
     <text x="72" y="150" font-size="60" font-weight="800" fill="#ffffff">ComplexNumbers<tspan fill="#9558B2">.jl</tspan></text>
-    <text x="74" y="200" font-size="25" font-weight="400" fill="#b8bdcc">Números complexos em Julia: formas polar e</text>
-    <text x="74" y="234" font-size="25" font-weight="400" fill="#b8bdcc">cartesiana, operadores e conjugado.</text>
+    <text x="74" y="200" font-size="25" font-weight="400" fill="#b8bdcc">Complex numbers in Julia: polar and</text>
+    <text x="74" y="234" font-size="25" font-weight="400" fill="#b8bdcc">Cartesian forms, operators, and conjugate.</text>
   </g>
 
-  <!-- Trecho de código -->
+  <!-- Code snippet -->
   <rect x="72" y="282" width="560" height="270" rx="14" fill="#0c0e15" stroke="#2c3142" stroke-width="1.5"/>
   <circle cx="98" cy="306" r="6" fill="#CB3C33"/>
   <circle cx="118" cy="306" r="6" fill="#389826"/>

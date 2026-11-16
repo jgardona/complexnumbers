@@ -3,7 +3,7 @@ using Test
 
 @testset "ComplexNumbers" begin
 
-    @testset "Construtores e acessores" begin
+    @testset "Constructors and accessors" begin
         z = ComplexNumber(3, 4)
         @test real(z) == 3
         @test imag(z) == 4
@@ -11,7 +11,7 @@ using Test
         @test ComplexNumber(1, 2.5) isa ComplexNumber{Float64}
     end
 
-    @testset "Polar -> cartesiana" begin
+    @testset "Polar -> Cartesian" begin
         @test frompolar(1, π / 2) ≈ ComplexNumber(0, 1)
         @test frompolar(2, π) ≈ ComplexNumber(-2, 0)
         @test frompolar(2, 180; degrees=true) ≈ ComplexNumber(-2, 0)
@@ -20,7 +20,7 @@ using Test
         @test frompolar(0, 1.234) ≈ ComplexNumber(0, 0)
     end
 
-    @testset "Cartesiana -> polar" begin
+    @testset "Cartesian -> polar" begin
         r, θ = topolar(ComplexNumber(3, 4))
         @test r ≈ 5
         @test θ ≈ atan(4, 3)
@@ -29,7 +29,7 @@ using Test
         @test r ≈ 1
         @test θ ≈ 90
 
-        # Quatro quadrantes
+        # All four quadrants
         @test argument(ComplexNumber(1, 1)) ≈ π / 4
         @test argument(ComplexNumber(-1, 1)) ≈ 3π / 4
         @test argument(ComplexNumber(-1, -1)) ≈ -3π / 4
@@ -40,7 +40,7 @@ using Test
         @test abs(ComplexNumber(3, 4)) ≈ 5
         @test angle(ComplexNumber(0, 2)) ≈ π / 2
 
-        # Ida e volta
+        # Round trip
         for z in (ComplexNumber(3.0, 4.0), ComplexNumber(-2.5, 1.0), ComplexNumber(-1.0, -7.0), ComplexNumber(0.5, -0.25))
             @test frompolar(topolar(z)...) ≈ z
             @test frompolar(topolar(z; degrees=true)...; degrees=true) ≈ z
@@ -59,14 +59,15 @@ using Test
         @test tostring(ComplexNumber(3, 4); form=:polar, degrees=true) == "5.0∠53.1301°"
         @test tostring(ComplexNumber(0, 1); form=:polar, degrees=true) == "1.0∠90.0°"
 
-        # string/print usam a forma cartesiana via show
+        # string/print use the Cartesian form via show
         @test string(ComplexNumber(1.5, -2.0)) == "1.5 - 2.0i"
         @test sprint(print, ComplexNumber(1, 1)) == "1 + 1i"
 
-        @test_throws ArgumentError tostring(ComplexNumber(1, 1); form=:invalida)
+        @test_throws ArgumentError tostring(ComplexNumber(1, 1); form=:invalid)
+        @test_throws ArgumentError("invalid form: :invalid; use :cartesian or :polar") tostring(ComplexNumber(1, 1); form=:invalid)
     end
 
-    @testset "Operadores aritméticos" begin
+    @testset "Arithmetic operators" begin
         a = ComplexNumber(1, 2)
         b = ComplexNumber(3, 4)
 
@@ -77,7 +78,7 @@ using Test
         @test (a / b) * b ≈ a
         @test -a == ComplexNumber(-1, -2)
 
-        # Com números reais, nos dois lados
+        # With real numbers, on both sides
         @test a + 2 == ComplexNumber(3, 2)
         @test 2 + a == ComplexNumber(3, 2)
         @test a - 1 == ComplexNumber(0, 2)
@@ -88,11 +89,11 @@ using Test
         @test a / 2 ≈ ComplexNumber(0.5, 1.0)
         @test 1 / ComplexNumber(0, 1) ≈ ComplexNumber(0, -1)
 
-        # Divisão por zero
+        # Division by zero
         @test_throws DivideError a / ComplexNumber(0, 0)
         @test_throws DivideError a / 0
 
-        # Verificação cruzada com o Complex nativo do Julia
+        # Cross-check against Julia's built-in Complex
         x = ComplexNumber(1.7, -3.2)
         y = ComplexNumber(-0.4, 2.9)
         for (op, r) in ((+, x + y), (-, x - y), (*, x * y), (/, x / y))
@@ -100,7 +101,7 @@ using Test
         end
     end
 
-    @testset "Interoperabilidade com Complex" begin
+    @testset "Interoperability with Complex" begin
         z = ComplexNumber(3, 4)
 
         @test z + 10im == ComplexNumber(3, 14)
@@ -124,7 +125,7 @@ using Test
         @test_throws DivideError z / (0 + 0im)
     end
 
-    @testset "Conjugado" begin
+    @testset "Conjugate" begin
         z = ComplexNumber(3, 4)
         @test conj(z) == ComplexNumber(3, -4)
         @test z' == ComplexNumber(3, -4)

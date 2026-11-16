@@ -2,90 +2,90 @@
     <img src="assets/social-preview.svg" />
 </div>
 
-Pacote Julia com uma implementação própria de números complexos, `ComplexNumber`, pensada para estudo e uso didático.
+A Julia package with a custom implementation of complex numbers, `ComplexNumber`, designed for study and teaching.
 
-**Funcionalidades**
+**Features**
 
-- Conversão da forma **polar → cartesiana** e **cartesiana → polar** (em radianos ou graus)
-- Conversão para **string** nas formas cartesiana ou polar (equivalente ao `toString` do Java)
-- **Sobrecarga dos operadores** `+`, `-`, `*`, `/` entre números complexos e números reais
-- **Conjugado** com `conj(z)` ou com o operador pós-fixo `z'`
-- **Interoperabilidade** com o `Complex` nativo do Julia (`z + 10im`, `im * z`, ...)
+- Conversion from **polar → Cartesian** and **Cartesian → polar** form (in radians or degrees)
+- Conversion to a **string** in Cartesian or polar form (equivalent to Java's `toString`)
+- **Operator overloading** for `+`, `-`, `*`, `/` between complex numbers and real numbers
+- **Conjugate** with `conj(z)` or the postfix operator `z'`
+- **Interoperability** with Julia's built-in `Complex` (`z + 10im`, `im * z`, ...)
 
 ---
 
-## Requisitos
+## Requirements
 
-- Julia **1.6** ou superior
+- Julia **1.6** or later
 
-## Instalação
+## Installation
 
-### A partir do código local
+### From local code
 
-Clone ou copie o projeto e registre-o no seu ambiente em modo de desenvolvimento:
+Clone or copy the project and register it in your environment in development mode:
 
 ```julia
 julia> using Pkg
-julia> Pkg.develop(path="/caminho/para/complexnumbers")
+julia> Pkg.develop(path="/path/to/complexnumbers")
 ```
 
-Ou, no modo Pkg do REPL (tecle `]`):
+Or, in the REPL's Pkg mode (press `]`):
 
 ```
-pkg> dev /caminho/para/complexnumbers
+pkg> dev /path/to/complexnumbers
 ```
 
-Outra opção é ativar o projeto diretamente na pasta dele:
+Another option is to activate the project directly from its folder:
 
 ```bash
 cd complexnumbers
 julia --project=.
 ```
 
-### A partir de um repositório git
+### From a git repository
 
-Quando o pacote estiver publicado em um repositório (troque a URL pela real):
+Once the package is published in a repository (replace the URL with the real one):
 
 ```julia
 julia> using Pkg
-julia> Pkg.add(url="https://github.com/<usuario>/ComplexNumbers.jl")
+julia> Pkg.add(url="https://github.com/<username>/ComplexNumbers.jl")
 ```
 
-### Carregando o pacote
+### Loading the package
 
 ```julia
 julia> using ComplexNumbers
 ```
 
-### Dica: desenvolvimento com Revise.jl
+### Tip: development with Revise.jl
 
-O [Revise.jl](https://github.com/timholy/Revise.jl) recarrega o código automaticamente quando você salva um arquivo, sem precisar reiniciar o Julia. Ele **precisa ser carregado antes** do pacote:
+The [Revise.jl](https://github.com/timholy/Revise.jl) automatically reloads code when you save a file, without restarting Julia. It **must be loaded before** the package:
 
 ```julia
-julia> using Revise          # primeiro
-julia> using ComplexNumbers  # depois
+julia> using Revise          # first
+julia> using ComplexNumbers  # then
 ```
 
-Se o pacote já tiver sido carregado antes do Revise, as alterações não serão acompanhadas, e será preciso reiniciar o REPL. Para nunca esquecer, adicione `using Revise` ao arquivo `~/.julia/config/startup.jl`.
+If the package was loaded before Revise, changes will not be tracked and you will need to restart the REPL. To never forget, add `using Revise` to the file `~/.julia/config/startup.jl`.
 
-> O Revise não consegue redefinir `struct`s. Se você mudar os campos de `ComplexNumber`, reinicie o Julia.
+> Revise cannot redefine `struct`s. If you change the fields of `ComplexNumber`, restart Julia.
 
 ---
 
 ## Tutorial
 
-### 1. Criando números complexos
+### 1. Creating complex numbers
 
-Um `ComplexNumber` guarda a parte real (`re`) e a imaginária (`im`) na forma cartesiana `re + im·i`.
+A `ComplexNumber` stores the real part (`re`) and the imaginary part (`im`) in Cartesian form `re + im·i`.
 
 ```julia
 julia> z = ComplexNumber(3, 4)
 3 + 4i
 
-julia> ComplexNumber(2)            # só a parte real; a imaginária vira 0
+julia> ComplexNumber(2)            # real part only; the imaginary part becomes 0
 2 + 0i
 
-julia> ComplexNumber(1, 2.5)       # os tipos são promovidos automaticamente
+julia> ComplexNumber(1, 2.5)       # the types are promoted automatically
 1.0 + 2.5i
 
 julia> typeof(ComplexNumber(1, 2.5))
@@ -98,28 +98,28 @@ julia> imag(z)
 4
 ```
 
-### 2. Cartesiana → polar
+### 2. Cartesian → polar
 
-Na forma polar, um número complexo é descrito pelo **módulo** `r = √(re² + im²)` e pelo **argumento** (ângulo) `θ`, sempre no intervalo (−π, π].
+In polar form, a complex number is described by its **modulus** `r = √(re² + im²)` and its **argument** (angle) `θ`, always in the interval (−π, π].
 
 ```julia
 julia> modulus(z)
 5.0
 
-julia> argument(z)                 # em radianos
+julia> argument(z)                 # in radians
 0.9272952180016122
 
-julia> argument(z; degrees=true)   # em graus
+julia> argument(z; degrees=true)   # in degrees
 53.13010235415598
 
-julia> topolar(z)                  # tupla (r, θ)
+julia> topolar(z)                  # tuple (r, θ)
 (5.0, 0.9272952180016122)
 
 julia> topolar(z; degrees=true)
 (5.0, 53.13010235415598)
 ```
 
-As funções `abs` e `angle` do Julia também funcionam:
+Julia's `abs` and `angle` functions also work:
 
 ```julia
 julia> abs(z)
@@ -129,9 +129,9 @@ julia> angle(ComplexNumber(-1, 0))
 3.141592653589793
 ```
 
-### 3. Polar → cartesiana
+### 3. Polar → Cartesian
 
-`frompolar(r, θ)` cria um `ComplexNumber` a partir do módulo e do ângulo:
+`frompolar(r, θ)` creates a `ComplexNumber` from the modulus and the angle:
 
 ```julia
 julia> frompolar(1, π/2)
@@ -141,16 +141,16 @@ julia> frompolar(2, 30; degrees=true)
 1.7321 + 1.0i
 ```
 
-Ida e volta: converter para polar e depois de volta para cartesiana devolve o número original.
+Round trip: converting to polar and then back to Cartesian returns the original number.
 
 ```julia
 julia> frompolar(topolar(z)...)
 3.0 + 4.0i
 ```
 
-### 4. Convertendo para string
+### 4. Converting to a string
 
-`tostring` é o equivalente ao `toString` do Java. Por padrão, ele usa a forma cartesiana e arredonda para 4 casas decimais.
+`tostring` is the equivalent of Java's `toString`. By default, it uses the Cartesian form and rounds to 4 decimal places.
 
 ```julia
 julia> tostring(z)
@@ -166,7 +166,7 @@ julia> tostring(ComplexNumber(1/3, 2/3); digits=2)
 "0.33 + 0.67i"
 ```
 
-Forma polar, em radianos ou graus:
+Polar form, in radians or degrees:
 
 ```julia
 julia> tostring(z; form=:polar)
@@ -179,7 +179,7 @@ julia> tostring(z; form=:polar, degrees=true, digits=1)
 "5.0∠53.1°"
 ```
 
-As funções padrão `string`, `print` e `println` usam a forma cartesiana:
+The standard `string`, `print`, and `println` functions use the Cartesian form:
 
 ```julia
 julia> string(z)
@@ -189,16 +189,16 @@ julia> print(z)
 3 + 4i
 ```
 
-Uma forma inválida gera um erro:
+An invalid form raises an error:
 
 ```julia
 julia> tostring(z; form=:xyz)
-ERROR: ArgumentError: forma inválida: :xyz; use :cartesian ou :polar
+ERROR: ArgumentError: invalid form: :xyz; use :cartesian or :polar
 ```
 
-### 5. Operações aritméticas
+### 5. Arithmetic operations
 
-Os operadores `+`, `-`, `*` e `/` funcionam entre dois `ComplexNumber`:
+The operators `+`, `-`, `*`, and `/` work between two `ComplexNumber` values:
 
 ```julia
 julia> a = ComplexNumber(1, 2)
@@ -219,11 +219,11 @@ julia> a * b
 julia> a / b
 0.44 + 0.08i
 
-julia> -a                          # negação unária
+julia> -a                          # unary negation
 -1 - 2i
 ```
 
-Também funcionam com números reais, em qualquer ordem:
+They also work with real numbers, in either order:
 
 ```julia
 julia> a + 2
@@ -232,7 +232,7 @@ julia> a + 2
 julia> 10 - a
 9 - 2i
 
-julia> 3a                          # multiplicação implícita do Julia
+julia> 3a                          # Julia's implicit multiplication
 3 + 6i
 
 julia> a / 2
@@ -242,14 +242,14 @@ julia> 1 / ComplexNumber(0, 1)     # 1/i = -i
 0.0 - 1.0i
 ```
 
-Para comparar resultados de ponto flutuante, prefira `≈` (`isapprox`, digite `\approx<TAB>`) a `==`:
+To compare floating-point results, prefer `≈` (`isapprox`, type `\approx<TAB>`) over `==`:
 
 ```julia
 julia> (a / b) * b ≈ a
 true
 ```
 
-Dividir por zero gera `DivideError`:
+Dividing by zero raises `DivideError`:
 
 ```julia
 julia> a / ComplexNumber(0, 0)
@@ -259,9 +259,9 @@ julia> a / 0
 ERROR: DivideError: integer division error
 ```
 
-### 6. Conjugado
+### 6. Conjugate
 
-O conjugado de `re + im·i` é `re − im·i`. Ele pode ser obtido com `conj` ou com o operador pós-fixo `'`:
+The conjugate of `re + im·i` is `re − im·i`. It can be obtained with `conj` or the postfix operator `'`:
 
 ```julia
 julia> conj(z)
@@ -270,11 +270,11 @@ julia> conj(z)
 julia> z'
 3 - 4i
 
-julia> (z')'                       # o conjugado do conjugado é o próprio número
+julia> (z')'                       # the conjugate of the conjugate is the number itself
 3 + 4i
 ```
 
-Propriedades clássicas:
+Classic properties:
 
 ```julia
 julia> z * z'                      # z·z̄ = |z|²
@@ -284,9 +284,9 @@ julia> z + z'                      # z + z̄ = 2·re
 6 + 0i
 ```
 
-### 7. Interoperabilidade com o `Complex` do Julia
+### 7. Interoperability with Julia's `Complex`
 
-O Julia já tem o tipo `Complex` (`3 + 4im`, `10im`, `im`). Ele pode ser misturado livremente com `ComplexNumber`, e o resultado é sempre um `ComplexNumber`:
+Julia already has the `Complex` type (`3 + 4im`, `10im`, `im`). It can be freely mixed with `ComplexNumber`, and the result is always a `ComplexNumber`:
 
 ```julia
 julia> z + 10im
@@ -295,7 +295,7 @@ julia> z + 10im
 julia> 10im + z
 3 + 14i
 
-julia> im * z                      # multiplicar por i gira 90°
+julia> im * z                      # multiplying by i rotates by 90°
 -4 + 3i
 
 julia> z / (1 + 1im)
@@ -308,7 +308,7 @@ julia> typeof(z + 1.5im)
 ComplexNumber{Float64}
 ```
 
-Conversões explícitas entre os dois tipos:
+Explicit conversions between the two types:
 
 ```julia
 julia> ComplexNumber(5 - 2im)
@@ -318,9 +318,9 @@ julia> Complex(z)
 3 + 4im
 ```
 
-### 8. Exemplo completo: circuito RLC em série
+### 8. Complete example: series RLC circuit
 
-Neste exemplo, calculamos a impedância, a corrente e a potência complexa de um circuito com R = 100 Ω, L = 0,5 H e C = 100 µF, alimentado por 220 V a 60 Hz.
+In this example, we compute the impedance, current, and complex power of a circuit with R = 100 Ω, L = 0.5 H, and C = 100 µF, supplied by 220 V at 60 Hz.
 
 ```julia
 julia> R, L, C, ω = 100.0, 0.5, 1e-4, 2π * 60
@@ -329,69 +329,69 @@ julia> R, L, C, ω = 100.0, 0.5, 1e-4, 2π * 60
 julia> ZR = ComplexNumber(R)                 # resistor
 100.0 + 0.0i
 
-julia> ZL = ComplexNumber(0, ω * L)          # indutor:  jωL
+julia> ZL = ComplexNumber(0, ω * L)          # inductor:  jωL
 0.0 + 188.4956i
 
 julia> ZC = 1 / ComplexNumber(0, ω * C)      # capacitor: 1/(jωC)
 0.0 - 26.5258i
 
-julia> Z = ZR + ZL + ZC                      # impedância total
+julia> Z = ZR + ZL + ZC                      # total impedance
 100.0 + 161.9697i
 
 julia> tostring(Z; form=:polar, degrees=true, digits=2)
 "190.35∠58.31°"
 
-julia> V = frompolar(220, 0; degrees=true)   # tensão 220∠0°
+julia> V = frompolar(220, 0; degrees=true)   # voltage 220∠0°
 220.0 + 0.0i
 
-julia> I = V / Z                             # lei de Ohm
+julia> I = V / Z                             # Ohm's law
 0.6072 - 0.9834i
 
 julia> tostring(I; form=:polar, degrees=true, digits=3)
 "1.156∠-58.309°"
 
-julia> S = V * I'                            # potência complexa S = V·I*
+julia> S = V * I'                            # complex power S = V·I*
 133.5755 + 216.3519i
 
-julia> tostring(S; digits=1)                 # P = 133,6 W, Q = 216,4 VAr
+julia> tostring(S; digits=1)                 # P = 133.6 W, Q = 216.4 VAr
 "133.6 + 216.4i"
 ```
 
 ---
 
-## Referência da API
+## API reference
 
-| Função / operador | Descrição |
+| Function / operator | Description |
 |---|---|
-| `ComplexNumber(re, im)` | Cria um número complexo `re + im·i` |
-| `ComplexNumber(x)` | Cria um número complexo a partir de um real (`x + 0i`) ou de um `Complex` |
-| `real(z)`, `imag(z)` | Partes real e imaginária |
-| `modulus(z)`, `abs(z)` | Módulo `√(re² + im²)` |
-| `argument(z; degrees=false)`, `angle(z)` | Argumento no intervalo (−π, π] |
-| `topolar(z; degrees=false)` | Tupla `(r, θ)` |
-| `frompolar(r, θ; degrees=false)` | Cria um `ComplexNumber` a partir da forma polar |
-| `tostring(z; form=:cartesian, digits=4, degrees=false)` | String na forma `:cartesian` ou `:polar` |
-| `string(z)`, `print(z)` | String na forma cartesiana |
-| `+`, `-`, `*`, `/` | Aritmética com `ComplexNumber`, `Real` e `Complex` |
-| `-z` | Negação |
-| `==`, `≈` | Igualdade exata e aproximada |
-| `conj(z)`, `z'` | Conjugado |
-| `Complex(z)` | Converte para o `Complex` nativo do Julia |
+| `ComplexNumber(re, im)` | Creates a complex number `re + im·i` |
+| `ComplexNumber(x)` | Creates a complex number from a real (`x + 0i`) or a `Complex` |
+| `real(z)`, `imag(z)` | Real and imaginary parts |
+| `modulus(z)`, `abs(z)` | Modulus `√(re² + im²)` |
+| `argument(z; degrees=false)`, `angle(z)` | Argument in the interval (−π, π] |
+| `topolar(z; degrees=false)` | Tuple `(r, θ)` |
+| `frompolar(r, θ; degrees=false)` | Creates a `ComplexNumber` from polar form |
+| `tostring(z; form=:cartesian, digits=4, degrees=false)` | String in `:cartesian` or `:polar` form |
+| `string(z)`, `print(z)` | String in Cartesian form |
+| `+`, `-`, `*`, `/` | Arithmetic with `ComplexNumber`, `Real`, and `Complex` |
+| `-z` | Negation |
+| `==`, `≈` | Exact and approximate equality |
+| `conj(z)`, `z'` | Conjugate |
+| `Complex(z)` | Converts to Julia's built-in `Complex` |
 
-## Rodando os testes
+## Running the tests
 
-Na raiz do projeto:
+From the project root:
 
 ```bash
 julia --project=. -e 'using Pkg; Pkg.test()'
 ```
 
-Ou, no REPL com o projeto ativo, para uma execução mais rápida durante o desenvolvimento:
+Or, in the REPL with the project active, for a faster run during development:
 
 ```julia
 julia> include("test/runtests.jl")
 ```
 
-## Observação sobre o nome
+## A note on the name
 
-O pacote se chama `ComplexNumbers`, mas a struct se chama `ComplexNumber` (no singular). Em Julia, um módulo não pode conter um tipo com o mesmo nome que ele.
+The package is called `ComplexNumbers`, but the struct is called `ComplexNumber` (singular). In Julia, a module cannot contain a type with the same name as itself.
